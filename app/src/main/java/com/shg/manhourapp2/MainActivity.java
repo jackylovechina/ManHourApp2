@@ -2,7 +2,6 @@ package com.shg.manhourapp2;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 
 import com.google.gson.Gson;
@@ -25,18 +23,29 @@ import java.util.List;
 
 import adapter.MyElvAdapter;
 import domain.DispatchListBean;
+import dialog.FilterDialog;
+import utils.GlobalVar;
 import utils.ServerApi;
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener ,ExpandableListView.OnChildClickListener{
+
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, ExpandableListView.OnChildClickListener {
 
     private SwipeRefreshLayout dispatchList_SRL;
     private ExpandableListView dispatchList_ELV;
     private FloatingActionButton fab;
     private List<DispatchListBean> mUnCompDispatchLists;
 
+    String url;
+    String order;
+    private MainActivity mainActivity;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mainActivity = this;
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -46,11 +55,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void onClick(View view) {
 
+                FilterDialog filterDialog = new FilterDialog();
+                filterDialog.setFilter(mainActivity);
+                filterDialog.show(getSupportFragmentManager(), "filterDialog");
+
             }
         });
 
         dispatchList_SRL = (SwipeRefreshLayout) findViewById(R.id.srl_dispatchList);
+        dispatchList_SRL.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
         dispatchList_ELV = (ExpandableListView) findViewById(R.id.elv_dispatchList);
+
         dispatchList_SRL.setOnRefreshListener(this);
         dispatchList_ELV.setOnChildClickListener(this);
 
@@ -83,9 +99,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
+
         HttpManager httpManager = x.http();
 
-        RequestParams requestParams = new RequestParams(ServerApi.Address + ServerApi.GET_NOCOMPLETE);
+        url = ServerApi.Address;
+        if (GlobalVar.ISCOMP == false) {
+            order = ServerApi.GET_NOCOMPLETE;
+        } else {
+            order = ServerApi.GET_COMPLETE;
+        }
+
+        RequestParams requestParams = new RequestParams(url + order);
         requestParams.addParameter("employeeID", "36368FBA-08B4-48A7-BDC4-8511EFCDD820");
 
         httpManager.get(requestParams, new Callback.CommonCallback<String>() {
@@ -122,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-        Log.d("MyLog",mUnCompDispatchLists.get(groupPosition).dispatchListItemsViewModel.get(childPosition).volume);
+//        Log.d("MyLog",mUnCompDispatchLists.get(groupPosition).dispatchListItemsViewModel.get(childPosition).volume);
 
         return false;
     }
