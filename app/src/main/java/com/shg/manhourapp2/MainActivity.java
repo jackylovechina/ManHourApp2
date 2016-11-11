@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mainActivity.setTitle("未完成派工单");
         setSupportActionBar(toolbar);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);

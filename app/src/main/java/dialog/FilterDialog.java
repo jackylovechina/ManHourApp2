@@ -53,6 +53,16 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
 
                 GlobalVar.ISCOMP = filterIsComp_SW.isChecked();
                 mainActivity.onRefresh();
+                if (GlobalVar.ISCOMP) {
+
+                    mainActivity.setTitle("已完成派工单");
+
+                } else {
+
+                    mainActivity.setTitle("未完成派工单");
+
+                }
+                //mainActivity.setTitle("wancheng ");
                 Log.d("MyLog", GlobalVar.ISCOMP + "");
             }
         });
