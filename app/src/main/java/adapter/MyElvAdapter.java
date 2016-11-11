@@ -14,6 +14,7 @@ import java.util.List;
 import domain.DispatchItemBean;
 import domain.DispatchListBean;
 import utils.DateTimeUtils;
+import utils.GlobalVar;
 
 /**
  * Created by Administrator on 2016/11/11 0011.
@@ -92,16 +93,12 @@ public class MyElvAdapter extends BaseExpandableListAdapter {
 
         }
 
-        switch (1) {
-            case 1:
-                groupViewHolder.DispatchListImage_IV.setImageResource(R.drawable.uncomp_72px);
-                break;
-            case 2:
-                groupViewHolder.DispatchListImage_IV.setImageResource(R.drawable.comp_72px);
-                break;
-            default:
-                groupViewHolder.DispatchListImage_IV.setImageResource(R.drawable.comp_72px);
-                break;
+        if (!GlobalVar.ISCOMP) {
+
+            groupViewHolder.DispatchListImage_IV.setImageResource(R.drawable.uncomp_72px);
+        } else {
+            groupViewHolder.DispatchListImage_IV.setImageResource(R.drawable.comp_72px);
+
         }
         groupViewHolder.DispatchListNum_TV.setText("派工单编号:" + mDispatchListBean.get(groupPosition).num);
         groupViewHolder.ScheduledTime_TV.setText("计划时间:" + DateTimeUtils.getDateTime(mDispatchListBean.get(groupPosition).scheduledTime));

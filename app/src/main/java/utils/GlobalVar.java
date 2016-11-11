@@ -6,7 +6,7 @@ package utils;
 
 public class GlobalVar {
 
-    public static boolean ISCOMP = false;
+    public static boolean ISCOMP ;
     public static String DATE = null;
     public static String TIME = null;
 //    public static UnCompDispListFragment UNCOMP_INSTANCE =null;
