@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="25dp"
+    android:paddingRight="20dp"
     android:paddingTop="10dp">
 
     <Switch
@@ -12,5 +13,31 @@
         android:layout_height="wrap_content"
         android:text="是否完成:"
         android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_filter_condition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入工序类型" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#336699"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#336699"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

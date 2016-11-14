@@ -10,12 +10,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.shg.manhourapp2.MainActivity;
 import com.shg.manhourapp2.R;
 
 import utils.GlobalVar;
+
+import static com.google.gson.internal.UnsafeAllocator.create;
 
 /**
  * Created by Administrator on 2016/11/11 0011.
@@ -24,6 +27,7 @@ import utils.GlobalVar;
 public class FilterDialog extends DialogFragment implements CompoundButton.OnCheckedChangeListener {
 
     private Switch filterIsComp_SW;
+    private LinearLayout filterCondition_LL;
 
     private MainActivity mainActivity;
 
@@ -41,10 +45,18 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.dialog_filter, null);
         filterIsComp_SW = (Switch) view.findViewById(R.id.sw_filter_isComp);
+        filterCondition_LL = (LinearLayout) view.findViewById(R.id.ll_filter_condition);
+
         filterIsComp_SW.setChecked(GlobalVar.ISCOMP);
         filterIsComp_SW.setOnCheckedChangeListener(this);
 
+        if (GlobalVar.ISCOMP)
+            filterCondition_LL.setVisibility(View.VISIBLE);
+        else
+            filterCondition_LL.setVisibility(View.GONE);
+
         builder.setTitle("条件筛选");
+        builder.setIcon(android.R.drawable.ic_menu_edit);
         builder.setView(view);
 
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -68,7 +80,10 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
         });
         builder.setNegativeButton("取消", null);
 
-        return builder.create();
+        Dialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+
+        return dialog;
     }
 
     @Override
@@ -78,8 +93,11 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
 
             case R.id.sw_filter_isComp:
 
-//                GlobalVar.ISCOMP = isChecked;
-                Log.d("MyLog", isChecked + "");
+                if (isChecked)
+
+                    filterCondition_LL.setVisibility(View.VISIBLE);
+                else
+                    filterCondition_LL.setVisibility(View.GONE);
 
                 break;
         }
