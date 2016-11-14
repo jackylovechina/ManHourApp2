@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -22,8 +23,10 @@ import org.xutils.x;
 import java.util.List;
 
 import com.shg.manhourapp2.adapter.MyElvAdapter;
+import com.shg.manhourapp2.dialog.UpdateDialog;
 import com.shg.manhourapp2.domain.DispatchListBean;
 import com.shg.manhourapp2.dialog.FilterDialog;
+import com.shg.manhourapp2.utils.DatePopupWindows;
 import com.shg.manhourapp2.utils.GlobalVar;
 import com.shg.manhourapp2.utils.ServerApi;
 
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private SwipeRefreshLayout dispatchList_SRL;
     private ExpandableListView dispatchList_ELV;
     private FloatingActionButton fab;
+
     private List<DispatchListBean> mUnCompDispatchLists;
 
     String url;
@@ -148,7 +152,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-//        Log.d("MyLog",mUnCompDispatchLists.get(groupPosition).dispatchListItemsViewModel.get(childPosition).volume);
+
+        UpdateDialog updateDialog = new UpdateDialog();
+
+        updateDialog.show(getFragmentManager(), "update");
 
         return false;
     }
