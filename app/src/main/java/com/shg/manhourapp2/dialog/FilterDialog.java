@@ -18,6 +18,8 @@ import com.shg.manhourapp2.R;
 import com.shg.manhourapp2.utils.GlobalVar;
 
 
+import static com.google.gson.internal.UnsafeAllocator.create;
+
 /**
  * Created by Administrator on 2016/11/11 0011.
  */
