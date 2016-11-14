@@ -41,13 +41,13 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.dialog_filter, null);
         filterIsComp_SW = (Switch) view.findViewById(R.id.sw_filter_isComp);
-
+        filterIsComp_SW.setChecked(GlobalVar.ISCOMP);
         filterIsComp_SW.setOnCheckedChangeListener(this);
 
         builder.setTitle("条件筛选");
         builder.setView(view);
 
-        builder.setPositiveButton("确实", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -62,7 +62,7 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
                     mainActivity.setTitle("未完成派工单");
 
                 }
-                //mainActivity.setTitle("wancheng ");
+
                 Log.d("MyLog", GlobalVar.ISCOMP + "");
             }
         });
