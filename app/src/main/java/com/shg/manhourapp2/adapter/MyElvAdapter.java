@@ -1,4 +1,4 @@
-package adapter;
+package com.shg.manhourapp2.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +11,10 @@ import com.shg.manhourapp2.R;
 
 import java.util.List;
 
-import domain.DispatchItemBean;
-import domain.DispatchListBean;
-import utils.DateTimeUtils;
-import utils.GlobalVar;
+import com.shg.manhourapp2.domain.DispatchItemBean;
+import com.shg.manhourapp2.domain.DispatchListBean;
+import com.shg.manhourapp2.utils.DateTimeUtils;
+import com.shg.manhourapp2.utils.GlobalVar;
 
 /**
  * Created by Administrator on 2016/11/11 0011.

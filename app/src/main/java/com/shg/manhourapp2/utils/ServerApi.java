@@ -1,4 +1,4 @@
-package utils;
+package com.shg.manhourapp2.utils;
 
 /**
  * Created by Administrator on 2016/10/9 0009.

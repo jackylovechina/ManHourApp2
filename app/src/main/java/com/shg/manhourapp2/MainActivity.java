@@ -21,11 +21,11 @@ import org.xutils.x;
 
 import java.util.List;
 
-import adapter.MyElvAdapter;
-import domain.DispatchListBean;
-import dialog.FilterDialog;
-import utils.GlobalVar;
-import utils.ServerApi;
+import com.shg.manhourapp2.adapter.MyElvAdapter;
+import com.shg.manhourapp2.domain.DispatchListBean;
+import com.shg.manhourapp2.dialog.FilterDialog;
+import com.shg.manhourapp2.utils.GlobalVar;
+import com.shg.manhourapp2.utils.ServerApi;
 
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, ExpandableListView.OnChildClickListener {

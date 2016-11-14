@@ -1,4 +1,4 @@
-package domain;
+package com.shg.manhourapp2.domain;
 
 import java.io.Serializable;
 
