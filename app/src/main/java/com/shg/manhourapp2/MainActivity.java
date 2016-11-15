@@ -23,6 +23,7 @@ import org.xutils.x;
 import java.util.List;
 
 import com.shg.manhourapp2.adapter.MyElvAdapter;
+import com.shg.manhourapp2.dialog.DetailDialog;
 import com.shg.manhourapp2.dialog.UpdateDialog;
 import com.shg.manhourapp2.domain.DispatchListBean;
 import com.shg.manhourapp2.dialog.FilterDialog;
@@ -152,11 +153,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
+        if (GlobalVar.ISCOMP) {
 
-        UpdateDialog updateDialog = new UpdateDialog();
+            DetailDialog detailDialog = new DetailDialog();
 
-        updateDialog.show(getFragmentManager(), "update");
+            detailDialog.show(getFragmentManager(), "detail");
+        } else {
+            UpdateDialog updateDialog = new UpdateDialog();
 
+            updateDialog.show(getFragmentManager(), "update");
+        }
         return false;
     }
 }
