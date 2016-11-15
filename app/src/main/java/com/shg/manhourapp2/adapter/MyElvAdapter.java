@@ -130,6 +130,7 @@ public class MyElvAdapter extends BaseExpandableListAdapter {
             childViewHolder.ItemListMaterialName_TV = (TextView) convertView.findViewById(R.id.tv_dispatchItem_MaterialName);
             childViewHolder.ItemListVolume_TV = (TextView) convertView.findViewById(R.id.tv_dispatchItem_Volume);
             childViewHolder.ItemListShiftName_TV = (TextView) convertView.findViewById(R.id.tv_dispatchItem_ShiftName);
+            childViewHolder.ItemListManHourActual_TV = (TextView) convertView.findViewById(R.id.tv_dispatchItem_manHourActual);
 
             convertView.setTag(childViewHolder);
 
@@ -143,7 +144,7 @@ public class MyElvAdapter extends BaseExpandableListAdapter {
         childViewHolder.ItemListMaterialName_TV.setText("物料:" + mDispatchListBean.get(groupPosition).dispatchListItemsViewModel.get(childPosition).materialName);
         childViewHolder.ItemListVolume_TV.setText("物量:" + mDispatchListBean.get(groupPosition).dispatchListItemsViewModel.get(childPosition).volume);
         childViewHolder.ItemListShiftName_TV.setText("班次:" + mDispatchListBean.get(groupPosition).dispatchListItemsViewModel.get(childPosition).shiftName);
-
+        childViewHolder.ItemListManHourActual_TV.setText(mDispatchListBean.get(groupPosition).dispatchListItemsViewModel.get(childPosition).manHourActual + "h");
 
         return convertView;
     }
@@ -173,5 +174,6 @@ public class MyElvAdapter extends BaseExpandableListAdapter {
         TextView ItemListMaterialName_TV;
         TextView ItemListVolume_TV;
         TextView ItemListShiftName_TV;
+        TextView ItemListManHourActual_TV;
     }
 }

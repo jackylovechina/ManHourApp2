@@ -23,6 +23,7 @@ public class DetailDialog extends DialogFragment {
 
         builder.setView(view);
         builder.setTitle("工时信息");
+        builder.setIcon(android.R.drawable.ic_lock_idle_alarm);
         builder.setPositiveButton("确定", null);
         builder.setNegativeButton("取消", null);
 
