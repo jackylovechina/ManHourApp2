@@ -95,7 +95,7 @@ public class DatePopupWindows {
                 try {
                     Date begin = dateFormat.parse(currentTime);
                     Date end = dateFormat.parse(beginTime);
-                    tv_house_time.setText(DateUtils.formateStringH(beginTime, DateUtils.yyyyMMddHHmm));
+                    tv_house_time.setText(DateUtils.formateStringH(beginTime, DateUtils.yyyyMMddHHmm) + ":00");
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             detailDialog.show(getFragmentManager(), "detail");
         } else {
             UpdateDialog updateDialog = new UpdateDialog();
-
+            updateDialog.getVar(mainActivity, mUnCompDispatchLists.get(groupPosition).dispatchListItemsViewModel.get(childPosition));
             updateDialog.show(getFragmentManager(), "update");
         }
         return false;
