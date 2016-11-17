@@ -6,11 +6,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -156,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if (GlobalVar.ISCOMP) {
 
             DetailDialog detailDialog = new DetailDialog();
-
+            detailDialog.getVar(mUnCompDispatchLists.get(groupPosition).dispatchListItemsViewModel.get(childPosition));
             detailDialog.show(getFragmentManager(), "detail");
         } else {
             UpdateDialog updateDialog = new UpdateDialog();
@@ -164,5 +166,23 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             updateDialog.show(getFragmentManager(), "update");
         }
         return false;
+    }
+
+    private long mExitTime;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

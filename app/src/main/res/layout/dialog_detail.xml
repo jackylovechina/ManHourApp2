@@ -2,6 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="25dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/tv_detail_startTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffccff"
+        android:padding="5dp"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/tv_detail_endTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#ffccff"
+        android:padding="5dp"
+        android:textSize="22sp" />
 
 </LinearLayout>
