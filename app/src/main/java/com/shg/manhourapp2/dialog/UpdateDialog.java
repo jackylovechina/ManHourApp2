@@ -131,6 +131,8 @@ public class UpdateDialog extends DialogFragment implements View.OnClickListener
 
         updateStartTime_TV.setText(DateTimeUtils.getStartTime(DateTimeUtils.getDateTime(dispatchItemBean.completeDatetime), dispatchItemBean.manHourActual, "开始时间"));
         updateEndTime_TV.setText(DateTimeUtils.getDateTime(dispatchItemBean.completeDatetime, "结束时间"));
+        updateRemark_ET.setText(dispatchItemBean.remark);
+
     }
 
     private void getUpdateContent() {
@@ -170,6 +172,7 @@ public class UpdateDialog extends DialogFragment implements View.OnClickListener
                 Log.d("MyLog", result + "");
                 Toast.makeText(activity, "提交成功", Toast.LENGTH_SHORT).show();
                 activity.onRefresh();
+
 
 
             }
