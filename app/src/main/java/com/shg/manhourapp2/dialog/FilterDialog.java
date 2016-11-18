@@ -2,10 +2,11 @@ package com.shg.manhourapp2.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ import static com.google.gson.internal.UnsafeAllocator.create;
  * Created by Administrator on 2016/11/11 0011.
  */
 
-public class FilterDialog extends DialogFragment implements CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener {
+public class FilterDialog extends DialogFragment implements CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
     private Switch filterIsComp_SW;
     private LinearLayout filterCondition_LL;
@@ -65,9 +66,15 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
         filterCustom_RB = (RadioButton) view.findViewById(R.id.rb_filter_custom);
         filterCustom_LL = (LinearLayout) view.findViewById(R.id.ll_filter_custom);
 
+        filterStartDate_TV = (TextView) view.findViewById(R.id.tv_filter_startDate);
+        filterEndDate_TV = (TextView) view.findViewById(R.id.tv_filter_endDate);
+
         filterIsComp_SW.setChecked(GlobalVar.ISCOMP);
         filterIsComp_SW.setOnCheckedChangeListener(this);
         filterRegion_RG.setOnCheckedChangeListener(this);
+
+        filterStartDate_TV.setOnClickListener(this);
+        filterEndDate_TV.setOnClickListener(this);
 
         if (GlobalVar.ISCOMP)
             filterCondition_LL.setVisibility(View.VISIBLE);
@@ -144,6 +151,28 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
                 if (filter7early_RB.isChecked() || filter30early_RB.isChecked())
                     filterCustom_LL.setVisibility(View.GONE);
                 break;
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.tv_filter_startDate:
+                DateDialog startDateDialog = new DateDialog();
+                startDateDialog.getVar(filterStartDate_TV, 1);
+                startDateDialog.show(getFragmentManager(), "startTime");
+                break;
+
+            case R.id.tv_filter_endDate:
+
+                DateDialog endDateDialog = new DateDialog();
+                endDateDialog.getVar(filterEndDate_TV, 2);
+                endDateDialog.show(getFragmentManager(), "endTime");
+
+                break;
+
         }
 
     }

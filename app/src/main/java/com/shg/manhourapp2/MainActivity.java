@@ -60,18 +60,21 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         setSupportActionBar(toolbar);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setAlpha(0.6f);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 FilterDialog filterDialog = new FilterDialog();
                 filterDialog.setFilter(mainActivity);
-                filterDialog.show(getSupportFragmentManager(), "filterDialog");
+                filterDialog.show(getFragmentManager(), "filterDialog");
+//                fab.setAlpha(1.0f);
 
             }
         });
 
         dispatchList_SRL = (SwipeRefreshLayout) findViewById(R.id.srl_dispatchList);
+
         dispatchList_SRL.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
                 android.R.color.holo_orange_light, android.R.color.holo_red_light);
         dispatchList_ELV = (ExpandableListView) findViewById(R.id.elv_dispatchList);
