@@ -10,24 +10,37 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.shg.manhourapp2.MainActivity;
 import com.shg.manhourapp2.R;
 import com.shg.manhourapp2.utils.GlobalVar;
 
 
+import static android.R.attr.filter;
 import static com.google.gson.internal.UnsafeAllocator.create;
 
 /**
  * Created by Administrator on 2016/11/11 0011.
  */
 
-public class FilterDialog extends DialogFragment implements CompoundButton.OnCheckedChangeListener {
+public class FilterDialog extends DialogFragment implements CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener {
 
     private Switch filterIsComp_SW;
     private LinearLayout filterCondition_LL;
+    private EditText filterWorkProcedure_ET;
+    private RadioGroup filterRegion_RG;
+    private RadioButton filter7early_RB;
+    private RadioButton filter30early_RB;
+    private RadioButton filterCustom_RB;
+    private LinearLayout filterCustom_LL;
+    private TextView filterStartDate_TV;
+    private TextView filterEndDate_TV;
 
     private MainActivity mainActivity;
 
@@ -46,14 +59,25 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
         View view = layoutInflater.inflate(R.layout.dialog_filter, null);
         filterIsComp_SW = (Switch) view.findViewById(R.id.sw_filter_isComp);
         filterCondition_LL = (LinearLayout) view.findViewById(R.id.ll_filter_condition);
+        filterRegion_RG = (RadioGroup) view.findViewById(R.id.rg_filter_region);
+        filter7early_RB = (RadioButton) view.findViewById(R.id.rb_filter_7early);
+        filter30early_RB = (RadioButton) view.findViewById(R.id.rb_filter_30early);
+        filterCustom_RB = (RadioButton) view.findViewById(R.id.rb_filter_custom);
+        filterCustom_LL = (LinearLayout) view.findViewById(R.id.ll_filter_custom);
 
         filterIsComp_SW.setChecked(GlobalVar.ISCOMP);
         filterIsComp_SW.setOnCheckedChangeListener(this);
+        filterRegion_RG.setOnCheckedChangeListener(this);
 
         if (GlobalVar.ISCOMP)
             filterCondition_LL.setVisibility(View.VISIBLE);
         else
             filterCondition_LL.setVisibility(View.GONE);
+
+        if (filterCustom_RB.isChecked())
+            filterCustom_LL.setVisibility(View.VISIBLE);
+        else
+            filterCustom_LL.setVisibility(View.GONE);
 
         builder.setTitle("条件筛选");
         builder.setIcon(android.R.drawable.ic_menu_edit);
@@ -99,6 +123,26 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
                 else
                     filterCondition_LL.setVisibility(View.GONE);
 
+                break;
+        }
+
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+        switch (checkedId) {
+            case R.id.rb_filter_custom:
+
+                if (filterCustom_RB.isChecked())
+                    filterCustom_LL.setVisibility(View.VISIBLE);
+                else
+                    filterCustom_LL.setVisibility(View.GONE);
+
+                break;
+            default:
+                if (filter7early_RB.isChecked() || filter30early_RB.isChecked())
+                    filterCustom_LL.setVisibility(View.GONE);
                 break;
         }
 

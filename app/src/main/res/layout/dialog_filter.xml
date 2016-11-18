@@ -21,50 +21,66 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/et_filter_workProcedure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入工序类型" />
 
         <RadioGroup
+            android:id="@+id/rg_filter_region"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rb_filter_7early"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:checked="true"
                 android:text="近7天" />
 
             <RadioButton
+                android:id="@+id/rb_filter_30early"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="近30天" />
 
             <RadioButton
+                android:id="@+id/rb_filter_custom"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="其他" />
         </RadioGroup>
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/ll_filter_custom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="#ccffff"
-            android:padding="5dp"
-            android:textSize="20sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="#ccffff"
-            android:padding="5dp"
-            android:textSize="20sp" />
+            <TextView
+                android:id="@+id/tv_filter_startDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ccffff"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_filter_endDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ccffff"
+                android:padding="5dp"
+                android:textSize="20sp" />
+        </LinearLayout>
+
 
     </LinearLayout>
 
