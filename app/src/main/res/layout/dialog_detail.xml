@@ -10,6 +10,7 @@
         android:id="@+id/tv_detail_startTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="#ffccff"
         android:padding="5dp"
         android:textSize="22sp" />
