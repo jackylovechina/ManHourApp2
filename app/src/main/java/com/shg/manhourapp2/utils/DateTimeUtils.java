@@ -17,6 +17,8 @@ import java.util.Locale;
 public class DateTimeUtils {
 
     private static DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+    private static DateFormat shortFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+
 
     public static String getDateTime(String str) {
 
@@ -88,4 +90,33 @@ public class DateTimeUtils {
 
         return manHours;
     }
+
+    public static String getFilterDate(long day, String se) {
+        String result = null;
+
+        long endDate_l = System.currentTimeMillis();
+        Date endDate_d = new Date(endDate_l);
+        String endDate_s = shortFormat.format(endDate_d);
+
+        long startDate_l = endDate_l - (day * 24 * 60 * 60 * 1000);
+
+        Date startDate_d = new Date(startDate_l);
+        String startDate_s = shortFormat.format(startDate_d);
+
+        switch (se) {
+            case "start":
+
+                result = startDate_s;
+                break;
+            case "end":
+
+                result = endDate_s;
+                break;
+        }
+
+
+        return result;
+    }
+
+
 }

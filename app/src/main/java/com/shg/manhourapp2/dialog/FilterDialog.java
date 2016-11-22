@@ -58,16 +58,8 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.dialog_filter, null);
-        filterIsComp_SW = (Switch) view.findViewById(R.id.sw_filter_isComp);
-        filterCondition_LL = (LinearLayout) view.findViewById(R.id.ll_filter_condition);
-        filterRegion_RG = (RadioGroup) view.findViewById(R.id.rg_filter_region);
-        filter7early_RB = (RadioButton) view.findViewById(R.id.rb_filter_7early);
-        filter30early_RB = (RadioButton) view.findViewById(R.id.rb_filter_30early);
-        filterCustom_RB = (RadioButton) view.findViewById(R.id.rb_filter_custom);
-        filterCustom_LL = (LinearLayout) view.findViewById(R.id.ll_filter_custom);
 
-        filterStartDate_TV = (TextView) view.findViewById(R.id.tv_filter_startDate);
-        filterEndDate_TV = (TextView) view.findViewById(R.id.tv_filter_endDate);
+        initView(view);
 
         filterIsComp_SW.setChecked(GlobalVar.ISCOMP);
         filterIsComp_SW.setOnCheckedChangeListener(this);
@@ -95,7 +87,12 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
             public void onClick(DialogInterface dialog, int which) {
 
                 GlobalVar.ISCOMP = filterIsComp_SW.isChecked();
+                GlobalVar.SEVEN_EARLY = filter7early_RB.isChecked();
+                GlobalVar.THIRTY_EARLY = filter30early_RB.isChecked();
+                GlobalVar.CUSTOM = filterCustom_RB.isChecked();
+
                 mainActivity.onRefresh();
+
                 if (GlobalVar.ISCOMP) {
 
                     mainActivity.setTitle("已完成派工单");
@@ -139,6 +136,8 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         switch (checkedId) {
+
+
             case R.id.rb_filter_custom:
 
                 if (filterCustom_RB.isChecked())
@@ -176,4 +175,20 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
         }
 
     }
+
+    private void initView(View view) {
+
+        filterIsComp_SW = (Switch) view.findViewById(R.id.sw_filter_isComp);
+        filterCondition_LL = (LinearLayout) view.findViewById(R.id.ll_filter_condition);
+        filterRegion_RG = (RadioGroup) view.findViewById(R.id.rg_filter_region);
+        filter7early_RB = (RadioButton) view.findViewById(R.id.rb_filter_7early);
+        filter30early_RB = (RadioButton) view.findViewById(R.id.rb_filter_30early);
+        filterCustom_RB = (RadioButton) view.findViewById(R.id.rb_filter_custom);
+        filterCustom_LL = (LinearLayout) view.findViewById(R.id.ll_filter_custom);
+
+        filterStartDate_TV = (TextView) view.findViewById(R.id.tv_filter_startDate);
+        filterEndDate_TV = (TextView) view.findViewById(R.id.tv_filter_endDate);
+
+    }
+
 }

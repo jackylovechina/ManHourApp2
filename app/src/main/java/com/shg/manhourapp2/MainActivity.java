@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -29,7 +28,7 @@ import com.shg.manhourapp2.dialog.DetailDialog;
 import com.shg.manhourapp2.dialog.UpdateDialog;
 import com.shg.manhourapp2.domain.DispatchListBean;
 import com.shg.manhourapp2.dialog.FilterDialog;
-import com.shg.manhourapp2.utils.DatePopupWindows;
+import com.shg.manhourapp2.utils.DateTimeUtils;
 import com.shg.manhourapp2.utils.GlobalVar;
 import com.shg.manhourapp2.utils.ServerApi;
 
@@ -115,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         HttpManager httpManager = x.http();
 
         url = ServerApi.Address;
+
         if (GlobalVar.ISCOMP == false) {
             order = ServerApi.GET_NOCOMPLETE;
         } else {
@@ -122,7 +122,21 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
 
         RequestParams requestParams = new RequestParams(url + order);
-        requestParams.addParameter("employeeID", "36368FBA-08B4-48A7-BDC4-8511EFCDD820");
+        if (GlobalVar.ISCOMP == false) {
+            requestParams.addParameter("employeeID", "36368FBA-08B4-48A7-BDC4-8511EFCDD820");
+        } else if (GlobalVar.ISCOMP == true && GlobalVar.SEVEN_EARLY == true) {
+            requestParams.addParameter("employeeID", "36368FBA-08B4-48A7-BDC4-8511EFCDD820");
+            requestParams.addParameter("ScheduledStartTime", DateTimeUtils.getFilterDate(7, "start"));
+            requestParams.addParameter("ScheduledEndTime", DateTimeUtils.getFilterDate(7, "end"));
+        } else if (GlobalVar.ISCOMP == true && GlobalVar.THIRTY_EARLY == true) {
+            requestParams.addParameter("employeeID", "36368FBA-08B4-48A7-BDC4-8511EFCDD820");
+            requestParams.addParameter("ScheduledStartTime", DateTimeUtils.getFilterDate(30, "start"));
+            requestParams.addParameter("ScheduledEndTime", DateTimeUtils.getFilterDate(30, "end"));
+        } else if (GlobalVar.ISCOMP == true && GlobalVar.CUSTOM == true) {
+            requestParams.addParameter("employeeID", "36368FBA-08B4-48A7-BDC4-8511EFCDD820");
+            requestParams.addParameter("ScheduledStartTime", null);
+            requestParams.addParameter("ScheduledEndTime", null);
+        }
 
         httpManager.get(requestParams, new Callback.CommonCallback<String>() {
             @Override
