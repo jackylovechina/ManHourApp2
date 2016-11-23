@@ -21,16 +21,21 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.shg.manhourapp2.adapter.MyElvAdapter;
 import com.shg.manhourapp2.dialog.DetailDialog;
 import com.shg.manhourapp2.dialog.UpdateDialog;
+import com.shg.manhourapp2.domain.DispatchItemBean;
 import com.shg.manhourapp2.domain.DispatchListBean;
 import com.shg.manhourapp2.dialog.FilterDialog;
 import com.shg.manhourapp2.utils.DateTimeUtils;
 import com.shg.manhourapp2.utils.GlobalVar;
 import com.shg.manhourapp2.utils.ServerApi;
+
+import static android.R.id.list;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, ExpandableListView.OnChildClickListener {
@@ -145,7 +150,21 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 Gson gson = new Gson();
                 mUnCompDispatchLists = gson.fromJson(result, new TypeToken<List<DispatchListBean>>() {
                 }.getType());
-                dispatchList_ELV.setAdapter(new MyElvAdapter(mUnCompDispatchLists));
+
+                if (GlobalVar.ISCOMP == true) {
+                    List<DispatchListBean> filterDispatchList = new ArrayList<DispatchListBean>();
+                    for (int i = 0; i < mUnCompDispatchLists.size(); i++) {
+
+                        if (mUnCompDispatchLists.get(i).workingProcedureName.contains(GlobalVar.CONDITION)) {
+                            filterDispatchList.add(mUnCompDispatchLists.get(i));
+                        }
+
+                    }
+                    dispatchList_ELV.setAdapter(new MyElvAdapter(filterDispatchList));
+
+                } else {
+                    dispatchList_ELV.setAdapter(new MyElvAdapter(mUnCompDispatchLists));
+                }
 
             }
 

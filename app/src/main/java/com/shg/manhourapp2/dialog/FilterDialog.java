@@ -90,6 +90,7 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
                 GlobalVar.SEVEN_EARLY = filter7early_RB.isChecked();
                 GlobalVar.THIRTY_EARLY = filter30early_RB.isChecked();
                 GlobalVar.CUSTOM = filterCustom_RB.isChecked();
+                GlobalVar.CONDITION = filterWorkProcedure_ET.getText().toString();
 
                 mainActivity.onRefresh();
 
@@ -180,6 +181,7 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
 
         filterIsComp_SW = (Switch) view.findViewById(R.id.sw_filter_isComp);
         filterCondition_LL = (LinearLayout) view.findViewById(R.id.ll_filter_condition);
+        filterWorkProcedure_ET = (EditText) view.findViewById(R.id.et_filter_workProcedure);
         filterRegion_RG = (RadioGroup) view.findViewById(R.id.rg_filter_region);
         filter7early_RB = (RadioButton) view.findViewById(R.id.rb_filter_7early);
         filter30early_RB = (RadioButton) view.findViewById(R.id.rb_filter_30early);
