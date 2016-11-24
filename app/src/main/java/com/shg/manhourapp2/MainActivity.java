@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 requestParams.addParameter("ScheduledStartTime", GlobalVar.STARTDATE);
                 requestParams.addParameter("ScheduledEndTime", GlobalVar.ENDDATE);
             } else {
-                Toast.makeText(this, "时间先后不一致，默认近7天结果", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "时间选择有错误，默认近7天结果", Toast.LENGTH_SHORT).show();
                 requestParams.addParameter("ScheduledStartTime", DateTimeUtils.getFilterDate(7, "start"));
                 requestParams.addParameter("ScheduledEndTime", DateTimeUtils.getFilterDate(7, "end"));
             }
