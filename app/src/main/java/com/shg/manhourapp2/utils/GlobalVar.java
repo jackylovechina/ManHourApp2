@@ -13,6 +13,8 @@ public class GlobalVar {
     public static boolean THIRTY_EARLY;
     public static boolean CUSTOM;
     public static String CONDITION;
+    public static String STARTDATE;
+    public static String ENDDATE;
 
 
 //    public static UnCompDispListFragment UNCOMP_INSTANCE =null;

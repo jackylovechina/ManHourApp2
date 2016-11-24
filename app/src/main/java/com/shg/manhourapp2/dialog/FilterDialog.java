@@ -91,6 +91,10 @@ public class FilterDialog extends DialogFragment implements CompoundButton.OnChe
                 GlobalVar.THIRTY_EARLY = filter30early_RB.isChecked();
                 GlobalVar.CUSTOM = filterCustom_RB.isChecked();
                 GlobalVar.CONDITION = filterWorkProcedure_ET.getText().toString();
+                if (filterCustom_RB.isChecked()) {
+                    GlobalVar.STARTDATE = filterStartDate_TV.getText().toString();
+                    GlobalVar.ENDDATE = filterEndDate_TV.getText().toString();
+                }
 
                 mainActivity.onRefresh();
 

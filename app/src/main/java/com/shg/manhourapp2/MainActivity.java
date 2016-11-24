@@ -139,8 +139,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             requestParams.addParameter("ScheduledEndTime", DateTimeUtils.getFilterDate(30, "end"));
         } else if (GlobalVar.ISCOMP == true && GlobalVar.CUSTOM == true) {
             requestParams.addParameter("employeeID", "36368FBA-08B4-48A7-BDC4-8511EFCDD820");
-            requestParams.addParameter("ScheduledStartTime", null);
-            requestParams.addParameter("ScheduledEndTime", null);
+            if (DateTimeUtils.judgeEarlyDate(GlobalVar.STARTDATE, GlobalVar.ENDDATE)) {
+                requestParams.addParameter("ScheduledStartTime", GlobalVar.STARTDATE);
+                requestParams.addParameter("ScheduledEndTime", GlobalVar.ENDDATE);
+            } else {
+                Toast.makeText(this, "时间先后不一致，默认近7天结果", Toast.LENGTH_SHORT).show();
+                requestParams.addParameter("ScheduledStartTime", DateTimeUtils.getFilterDate(7, "start"));
+                requestParams.addParameter("ScheduledEndTime", DateTimeUtils.getFilterDate(7, "end"));
+            }
         }
 
         httpManager.get(requestParams, new Callback.CommonCallback<String>() {

@@ -118,5 +118,19 @@ public class DateTimeUtils {
         return result;
     }
 
+    public static boolean judgeEarlyDate(String startDate, String endDate) {
+
+        try {
+            Date startD = shortFormat.parse(startDate);
+            Date endD = shortFormat.parse(endDate);
+            return startD.before(endD);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
+    }
+
 
 }
