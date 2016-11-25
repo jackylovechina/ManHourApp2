@@ -27,15 +27,11 @@ import java.util.List;
 import com.shg.manhourapp2.adapter.MyElvAdapter;
 import com.shg.manhourapp2.dialog.DetailDialog;
 import com.shg.manhourapp2.dialog.UpdateDialog;
-import com.shg.manhourapp2.domain.DispatchItemBean;
 import com.shg.manhourapp2.domain.DispatchListBean;
 import com.shg.manhourapp2.dialog.FilterDialog;
 import com.shg.manhourapp2.utils.DateTimeUtils;
 import com.shg.manhourapp2.utils.GlobalVar;
 import com.shg.manhourapp2.utils.ServerApi;
-
-import static android.R.id.list;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, ExpandableListView.OnChildClickListener {
@@ -105,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_userInfo) {
             return true;
         }
 
