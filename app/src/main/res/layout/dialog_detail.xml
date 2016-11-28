@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="#ffccff"
+        android:drawableLeft="@drawable/s_24px"
         android:padding="5dp"
         android:textSize="22sp" />
 
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="#ffccff"
+        android:drawableLeft="@drawable/e_24px"
         android:padding="5dp"
         android:textSize="22sp" />
 
