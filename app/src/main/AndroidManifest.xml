@@ -30,7 +30,7 @@
 
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/MyFullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
