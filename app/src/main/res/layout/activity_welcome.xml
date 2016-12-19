@@ -20,6 +20,7 @@
         android:layout_marginTop="50dp"
         android:drawableTop="@drawable/app"
         android:gravity="center"
-        android:text="ManHourApp" />
+        android:textSize="22sp"
+        android:text="工时上报App" />
 
 </RelativeLayout>
