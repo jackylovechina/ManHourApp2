@@ -22,4 +22,14 @@
         android:text="工时上报App"
         android:textSize="22sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="兴船报国 创新超越"
+        android:textColor="#3366ff"
+        android:textSize="18sp" />
+
 </RelativeLayout>
