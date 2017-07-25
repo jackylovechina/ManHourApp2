@@ -9,6 +9,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.shg.manhourapp2.domain.LoginViewModel;
+import com.shg.manhourapp2.utils.GlobalVar;
+import com.shg.manhourapp2.utils.ServerApi;
+
+import org.xutils.HttpManager;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
+import static com.shg.manhourapp2.R.id.login;
 
 /**
  * Created by Administrator on 2016/11/25 0025.
@@ -56,14 +69,57 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     return;
 
                 }
-
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                this.finish();
+                LoginViewModel loginViewModel = new LoginViewModel();
+                loginViewModel.LoginID = mET_userNameLogin.getText().toString();
+                loginViewModel.Password = mET_passwordLogin.getText().toString();
+                onLoginCheck(loginViewModel);
 
 
                 break;
         }
+    }
+
+    private void onLoginCheck(LoginViewModel loginViewModel) {
+
+        HttpManager httpManager = x.http();
+
+        String urlCheck = ServerApi.Login;
+
+        RequestParams params = new RequestParams(urlCheck);
+
+        Gson gson = new Gson();
+        String viewmodel = gson.toJson(loginViewModel);
+        params.setAsJsonContent(true);
+        params.setBodyContent(viewmodel);
+
+        httpManager.post(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                GlobalVar.TOKEN = result;
+
+                Intent intent = new Intent();
+                intent.setClass(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                LoginActivity.this.finish();
+
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Toast.makeText(LoginActivity.this, "账户或密码错误", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
+
+
     }
 }

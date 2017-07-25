@@ -15,6 +15,7 @@ public class GlobalVar {
     public static String CONDITION;
     public static String STARTDATE;
     public static String ENDDATE;
+    public static String TOKEN;
 
 
 //    public static UnCompDispListFragment UNCOMP_INSTANCE =null;
