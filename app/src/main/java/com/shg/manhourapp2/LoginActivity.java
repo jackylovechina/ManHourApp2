@@ -81,11 +81,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void onLoginCheck(LoginViewModel loginViewModel) {
 
-        HttpManager httpManager = x.http();
+        final HttpManager httpManager = x.http();
 
-        String urlCheck = ServerApi.Login;
+        String urlLogin = ServerApi.Login;
+        String urlCheck = ServerApi.Check;
 
-        RequestParams params = new RequestParams(urlCheck);
+        RequestParams params = new RequestParams(urlLogin + urlCheck);
 
         Gson gson = new Gson();
         String viewmodel = gson.toJson(loginViewModel);
@@ -96,17 +97,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onSuccess(String result) {
                 GlobalVar.TOKEN = result;
-
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                LoginActivity.this.finish();
+                Toast.makeText(LoginActivity.this, "登录中"+result, Toast.LENGTH_LONG).show();
+                getAccountInfo(httpManager,result);
+//                Intent intent = new Intent();
+//                intent.setClass(LoginActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                LoginActivity.this.finish();
 
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(LoginActivity.this, "账户或密码错误", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -120,6 +122,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+
+    }
+
+    private void getAccountInfo(HttpManager httpManager, String token) {
+        RequestParams params = new RequestParams(ServerApi.Login + ServerApi.GetAccountInfo);
+        params.addHeader("Token",token);
+        httpManager.get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+
+                Log.d("re",result);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.d("re","error");
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
+            }
+        });
 
     }
 }
