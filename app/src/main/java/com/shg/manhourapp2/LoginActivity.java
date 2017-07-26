@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.shg.manhourapp2.domain.LoginViewModel;
+import com.shg.manhourapp2.domain.SysUser;
 import com.shg.manhourapp2.utils.GlobalVar;
 import com.shg.manhourapp2.utils.ServerApi;
 
@@ -89,9 +91,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         RequestParams params = new RequestParams(urlLogin + urlCheck);
 
         Gson gson = new Gson();
-        String viewmodel = gson.toJson(loginViewModel);
+        String viewModel = gson.toJson(loginViewModel);
         params.setAsJsonContent(true);
-        params.setBodyContent(viewmodel);
+        params.setBodyContent(viewModel);
 
         httpManager.post(params, new Callback.CommonCallback<String>() {
             @Override
@@ -133,6 +135,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onSuccess(String result) {
 
                 Log.d("re",result);
+                Gson gson=new Gson();
+                SysUser sysUser=new SysUser();
+                sysUser=gson.fromJson(result,SysUser.class);
+                Log.d("sysuser",sysUser.employeeViewModel.name);
+
             }
 
             @Override
