@@ -24,6 +24,7 @@ import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import static com.shg.manhourapp2.R.id.login;
+import static com.shg.manhourapp2.utils.GlobalVar.sysUser;
 
 /**
  * Created by Administrator on 2016/11/25 0025.
@@ -99,12 +100,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onSuccess(String result) {
                 GlobalVar.TOKEN = result;
-                Toast.makeText(LoginActivity.this, "登录中"+result, Toast.LENGTH_LONG).show();
-                getAccountInfo(httpManager,result);
-//                Intent intent = new Intent();
-//                intent.setClass(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                LoginActivity.this.finish();
+                Toast.makeText(LoginActivity.this, "登录中" + result, Toast.LENGTH_LONG).show();
+                getAccountInfo(httpManager, result);
+
 
             }
 
@@ -129,22 +127,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void getAccountInfo(HttpManager httpManager, String token) {
         RequestParams params = new RequestParams(ServerApi.Login + ServerApi.GetAccountInfo);
-        params.addHeader("Token",token);
+        params.addHeader("Token", token);
         httpManager.get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
 
-                Log.d("re",result);
-                Gson gson=new Gson();
-                SysUser sysUser=new SysUser();
-                sysUser=gson.fromJson(result,SysUser.class);
-                Log.d("sysuser",sysUser.employeeViewModel.name);
+                Log.d("re", result);
+                Gson gson = new Gson();
+
+                GlobalVar.sysUser = gson.fromJson(result, SysUser.class);
+                Log.d("sysuser", sysUser.employeeViewModel.name);
+                String strUser = gson.toJson(sysUser);
+                Log.d("strUser", strUser);
+                judgeUser();
 
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-                Log.d("re","error");
+                Log.d("re", "error");
             }
 
             @Override
@@ -158,5 +159,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
+    }
+
+    private void judgeUser() {
+        int moduleNums = 0;
+        int moduleListNums = GlobalVar.sysUser.roleModuleFuncViewModels.size();
+        for (int i = 0; i < moduleListNums; i++) {
+            if (GlobalVar.sysUser.roleModuleFuncViewModels.get(i).module.sysName.equals("ManHourActualForAndroid")) {
+                moduleNums++;
+            }
+        }
+        if (GlobalVar.sysUser.employeeViewModel == null) {
+            Toast.makeText(LoginActivity.this, "员工信息未绑定", Toast.LENGTH_LONG).show();
+        } else if (GlobalVar.sysUser.roleModuleFuncViewModels == null) {
+            Toast.makeText(LoginActivity.this, "员工未绑定权限", Toast.LENGTH_LONG).show();
+        } else if (moduleNums == 0) {
+            Toast.makeText(LoginActivity.this, "员工无手机访问权限", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
+            //                Intent intent = new Intent();
+//                intent.setClass(LoginActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                LoginActivity.this.finish();
+        }
     }
 }
