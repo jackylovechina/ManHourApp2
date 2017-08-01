@@ -177,10 +177,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(LoginActivity.this, "员工无手机访问权限", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_LONG).show();
-            //                Intent intent = new Intent();
-//                intent.setClass(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                LoginActivity.this.finish();
+            Intent intent = new Intent();
+            intent.setClass(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            LoginActivity.this.finish();
         }
     }
 }
