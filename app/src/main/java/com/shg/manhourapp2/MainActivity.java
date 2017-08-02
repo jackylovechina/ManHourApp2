@@ -27,6 +27,7 @@ import java.util.List;
 import com.shg.manhourapp2.adapter.MyElvAdapter;
 import com.shg.manhourapp2.dialog.DetailDialog;
 import com.shg.manhourapp2.dialog.UpdateDialog;
+import com.shg.manhourapp2.dialog.UserInfoDialog;
 import com.shg.manhourapp2.domain.DispatchListBean;
 import com.shg.manhourapp2.dialog.FilterDialog;
 import com.shg.manhourapp2.utils.DateTimeUtils;
@@ -102,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_userInfo) {
+            UserInfoDialog userInfoDialog=new UserInfoDialog();
+            userInfoDialog.show(getFragmentManager(),"userInfo");
             return true;
         }
 
