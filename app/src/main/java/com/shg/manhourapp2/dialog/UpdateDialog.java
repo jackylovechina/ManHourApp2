@@ -18,6 +18,7 @@ import com.shg.manhourapp2.R;
 import com.shg.manhourapp2.domain.DispatchItemBean;
 import com.shg.manhourapp2.utils.DatePopupWindows;
 import com.shg.manhourapp2.utils.DateTimeUtils;
+import com.shg.manhourapp2.utils.GlobalVar;
 import com.shg.manhourapp2.utils.ServerApi;
 
 import org.xutils.HttpManager;
@@ -162,6 +163,7 @@ public class UpdateDialog extends DialogFragment implements View.OnClickListener
 
         Log.d("MyLog", viewModel);
 
+        putParams.addHeader("Token", GlobalVar.TOKEN);
         putParams.setAsJsonContent(true);
         putParams.setBodyContent(viewModel);
 

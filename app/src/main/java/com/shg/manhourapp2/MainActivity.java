@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
 
         RequestParams requestParams = new RequestParams(url + order);
+        requestParams.addHeader("Token",GlobalVar.TOKEN);
         if (GlobalVar.ISCOMP == false) {
             requestParams.addParameter("employeeID", GlobalVar.sysUser.employeeViewModel.id);
         } else if (GlobalVar.ISCOMP == true && GlobalVar.SEVEN_EARLY == true) {
